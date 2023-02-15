@@ -12,5 +12,15 @@ def generate_code():
     return code
 
 def guess_code():
-    guess = input("Guess: ").upper().split(" ")
 
+    while True: # thsi catches things in case they input an invalid number
+        guess = input("Guess: ").upper().split(" ")
+
+        if len(guess) != CODE_LENGTH:
+            print(f"You must guess {CODE_LENGTH} colors") # f strings are available in Python 3.7 and above
+            continue # brings us back to the top of the while loop (NOT the if statement)
+
+        for color in guess:
+            if color not in COLORS:
+                print(f"Invalid color: {color}. Try again.")
+                break # where would this put us after breaking out?
