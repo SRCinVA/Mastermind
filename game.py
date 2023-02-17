@@ -36,4 +36,10 @@ def check_code(guess, real_code):
     incorrect_pos = 0
 
     for color in real_code:
-        pass
+        if color not in color_counts: # if the key (the color) is not in the dictionary ...
+            color_counts[color] = 0 # ... then we want to add it. Apparently you do this in the first position
+        color_counts[color] += 1    # don't understand the rationale behind this line ...
+
+    for guess_color, real_color in zip(guess, real_code): # zip() wil create a handy tuple showing us the correct and the guessed item next to each other.
+        if guess_color == real_color:                     # the for loop decomposes that tuple.
+            correct_pos += 1
