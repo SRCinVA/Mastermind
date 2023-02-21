@@ -40,6 +40,19 @@ def check_code(guess, real_code):
             color_counts[color] = 0 # ... then we want to add it. Apparently you do this in the first position
         color_counts[color] += 1    # don't understand the rationale behind this line ...
 
+    # to deal with the correct colors
     for guess_color, real_color in zip(guess, real_code): # zip() wil create a handy tuple showing us the correct and the guessed item next to each other.
         if guess_color == real_color:                     # the for loop decomposes that tuple.
-            correct_pos += 1
+            correct_pos += 1                              # here, you record the number of correct items
+            color_counts[guess_color] -= 1                # then, we have to subtract that away so that we don't count it as incorrect. This removes it from consideration.
+
+    # next, to deal with the incorrect colors
+    for guess_color, real_color in zip(guess, real_code):
+        if guess_color in color_counts and color_counts[guess_color] > 0:  # meaning, (1.) if there's a key and (2.) there's still a color left in the list
+            incorrect_pos += 1
+            color_counts[guess_color] -= 1               # like above, we have to clear this one from the list
+
+    return correct_pos, incorrect_pos
+
+def game():
+    pass
