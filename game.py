@@ -55,4 +55,19 @@ def check_code(guess, real_code):
     return correct_pos, incorrect_pos
 
 def game():
-    pass
+    
+    print(f"Welcome to Mastermind--you have {TRIES} to guess the code...")
+
+    code = generate_code()
+    for attempts in range(1, TRIES + 1): # + to make sure it covers the complete set (1 to 10, inclusive)
+        guess = guess_code()
+        correct_pos, incorrect_pos = check_code(guess, code)
+        
+        if correct_pos == CODE_LENGTH:
+            print(f"You guessed the code in {attempts} tries!")
+            break # this cuts off the function right here, as they got everything correct.
+
+        print(f"Correct positions: {correct_pos} | Incorrect positions: {incorrect_pos}")
+
+    else:
+        print("You ran out of tries; the code was: ", *code)  # *code will print out every individual element from 'code', separated by spaces.
