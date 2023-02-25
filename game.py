@@ -9,15 +9,15 @@ def generate_code():
     for _ in range(CODE_LENGTH):  # the underscore is an anonymous variable, in whcih we don't really care about what place we're on. (Seems odd...) 
         color = random.choice(COLORS) # we randomly select a color ...
         code.append(color)  # ... which gets appended into [code]
+    
     return code
 
 def guess_code():
-
     while True: # thsi catches things in case they input an invalid number
         guess = input("Guess: ").upper().split(" ")
 
         if len(guess) != CODE_LENGTH:
-            print(f"You must guess {CODE_LENGTH} colors") # f strings are available in Python 3.7 and above
+            print(f"You must guess {CODE_LENGTH} colors.") # f strings are available in Python 3.7 and above
             continue # we break out of the for loop and it brings us back to the top of the while loop
 
         for color in guess:
@@ -55,9 +55,9 @@ def check_code(guess, real_code):
     return correct_pos, incorrect_pos
 
 def game():
-    
     print(f"Welcome to Mastermind--you have {TRIES} to guess the code...")
-
+    print("The valid colors are: ", *COLORS)
+    
     code = generate_code()
     for attempts in range(1, TRIES + 1): # + to make sure it covers the complete set (1 to 10, inclusive)
         guess = guess_code()
@@ -71,3 +71,6 @@ def game():
 
     else:
         print("You ran out of tries; the code was: ", *code)  # *code will print out every individual element from 'code', separated by spaces.
+
+if __name__ == "__main__":  # this will run the game one time.
+    game()
